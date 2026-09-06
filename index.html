@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDG 14: The Cosmic Ocean | Academic Presentation</title>
+  
+  <!-- Fonts: Space Grotesk, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM: UNIVERSE - GALAXY & COSMIC OCEAN (FANCIFUL & MINIMALIST)
+       ========================================================================== */
+    :root {
+      --space-void: #02040a;
+      --space-deep: #050b18;
+      --nebula-purple: #7928ca;
+      --nebula-pink: #ff0080;
+      --nebula-cyan: #00dfd8;
+      --starlight-blue: #38bdf8;
+      --starlight-gold: #fbbf24;
+      --supernova-coral: #fb7185;
+      --aurora-emerald: #34d399;
+      --cosmic-violet: #a855f7;
+
+      --card-glass: rgba(10, 18, 36, 0.65);
+      --card-border: rgba(120, 119, 198, 0.3);
+      --card-glow: rgba(168, 85, 247, 0.2);
+      
+      --text-pure: #ffffff;
+      --text-soft: #cbd5e1;
+      --text-muted: #94a3b8;
+
+      /* Speaker Cosmic Hues */
+      --sp1-color: #38bdf8; /* Cosmic Cyan */
+      --sp2-color: #fb7185; /* Supernova Coral */
+      --sp3-color: #34d399; /* Aurora Emerald */
+      --sp4-color: #c084fc; /* Stellar Violet */
+      --sp5-color: #22d3ee; /* Pulsar Aqua */
+      --sp6-color: #fbbf24; /* Solar Gold */
+
+      --radius-lg: 24px;
+      --radius-md: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--space-void);
+      color: var(--text-pure);
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Cosmic Galaxy & Starfield Canvas */
+    #galaxy-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Ambient Nebular Gradients */
+    .nebula-glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.45;
+      animation: floatNebula 18s ease-in-out infinite alternate;
+    }
+    .nebula-1 {
+      top: -15%;
+      left: 20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--nebula-purple) 0%, transparent 70%);
+    }
+    .nebula-2 {
+      bottom: -20%;
+      right: 15%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, var(--nebula-cyan) 0%, transparent 70%);
+      animation-delay: -6s;
+    }
+    .nebula-3 {
+      top: 35%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--nebula-pink) 0%, transparent 70%);
+      opacity: 0.25;
+      animation-delay: -12s;
+    }
+
+    @keyframes floatNebula {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(40px, -30px) scale(1.1); }
+      100% { transform: translate(-30px, 40px) scale(0.95); }
+    }
+
+    /* ==========================================================================
+       TOP PERSISTENT CONTROL BAR (Cosmic Glass)
+       ========================================================================== */
+    .top-navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      background: rgba(4, 9, 20, 0.75);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+    }
+
+    .galaxy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #7928ca 0%, #ff0080 100%);
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 0 16px rgba(255, 0, 128, 0.5);
+    }
+
+    /* Active Speaker Cosmic Pill */
+    .speaker-nav-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 5px 16px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.03);
+    }
+    .speaker-orb {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--starlight-blue);
+      box-shadow: 0 0 12px currentColor;
+      animation: pulseOrb 2s infinite ease-in-out;
+    }
+    @keyframes pulseOrb {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.7; }
+    }
+
+    /* 15:00 Timer */
+    .timer-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(8, 14, 28, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 5px 14px;
+      border-radius: 10px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .timer-time {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--starlight-blue);
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+    }
+    .timer-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-soft);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: all 0.2s;
+    }
+    .timer-btn:hover {
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-cosmic {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-pure);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.25s ease;
+    }
+    .btn-cosmic:hover {
+      background: rgba(168, 85, 247, 0.25);
+      border-color: var(--cosmic-violet);
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+    }
+    .btn-cosmic.active {
+      background: linear-gradient(135deg, #00dfd8 0%, #007cf0 100%);
+      color: #02040a;
+      border-color: transparent;
+      font-weight: 700;
+      box-shadow: 0 0 20px rgba(0, 223, 216, 0.6);
+    }
+
+    /* ==========================================================================
+       16:9 WIDESCREEN SLIDE STAGE
+       ========================================================================== */
+    .deck-wrapper {
+      position: relative;
+      z-index: 10;
+      width: 100vw;
+      height: calc(100vh - 60px);
+      margin-top: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 36px 48px 36px;
+    }
+
+    .slide-viewport {
+      position: relative;
+      width: 100%;
+      max-width: 1560px;
+      aspect-ratio: 16 / 9;
+      max-height: calc(100vh - 124px);
+      background: linear-gradient(145deg, rgba(8, 16, 34, 0.88) 0%, rgba(3, 7, 16, 0.96) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.35);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.85), 0 0 45px rgba(121, 40, 202, 0.25);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 44px 60px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.96) translateY(14px);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1) translateY(0);
+      z-index: 2;
+    }
+
+    /* Minimalist Header */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 26px;
+    }
+    .slide-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      margin-bottom: 8px;
+    }
+    .slide-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.35rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff 40%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .slide-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-soft);
+      margin-top: 4px;
+      font-weight: 400;
+    }
+
+    .speaker-cue-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(16, 26, 50, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 8px 18px;
+      border-radius: 14px;
+      text-align: right;
+    }
+
+    /* Minimalist Slide Body Grid */
+    .slide-body {
+      flex: 1;
+      display: grid;
+      gap: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Cosmic Glass Card - Few Bullets & High Impact */
+    .cosmic-card {
+      background: var(--card-glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cosmic-card:hover {
+      border-color: rgba(0, 223, 216, 0.6);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 45px -10px rgba(0, 223, 216, 0.25);
+    }
+    .cosmic-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--card-accent, var(--starlight-blue)), transparent);
+      opacity: 0.9;
+    }
+
+    /* Huge Hero Metrics */
+    .hero-stat {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 4.8rem;
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+      text-shadow: 0 0 30px var(--glow-color, rgba(56, 189, 248, 0.4));
+    }
+    .hero-stat-label {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    /* Few Punchy Bullets */
+    .bullet-stream {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .bullet-stream li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 1rem;
+      color: var(--text-soft);
+      line-height: 1.45;
+    }
+    .bullet-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--card-accent, var(--starlight-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+
+    /* Chemical Formula Cosmic Glow */
+    .cosmic-formula {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(3, 7, 18, 0.75);
+      border: 1px solid rgba(168, 85, 247, 0.5);
+      border-radius: 14px;
+      padding: 18px 24px;
+      font-size: 1.15rem;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 35px rgba(168, 85, 247, 0.25);
+    }
+    .chem-pulse {
+      color: var(--supernova-coral);
+      font-weight: 800;
+      text-shadow: 0 0 12px rgba(251, 113, 133, 0.6);
+    }
+
+    /* 3-Column Constellation */
+    .grid-3constellation {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      height: 100%;
+    }
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      height: 100%;
+    }
+
+    /* Bottom Controller */
+    .deck-footer {
+      height: 52px;
+      background: rgba(4, 9, 20, 0.85);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(168, 85, 247, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+    }
+    .footer-speakers {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sp-step-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .sp-step-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .sp-step-btn.current {
+      color: #02040a;
+      background: var(--nebula-cyan);
+      box-shadow: 0 0 14px rgba(0, 223, 216, 0.6);
+      font-weight: 800;
+    }
+
+    .progress-track {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00dfd8, #7928ca, #ff0080);
+      transition: width 0.4s ease;
+      box-shadow: 0 0 12px rgba(0, 223, 216, 0.8);
+    }
+
+    /* ==========================================================================
+       PRESENTER FLASHCARDS DRAWER
+       ========================================================================= */
+    .flashcard-drawer {
+      position: fixed;
+      right: 0;
+      top: 60px;
+      bottom: 0;
+      width: 440px;
+      background: rgba(5, 11, 24, 0.96);
+      backdrop-filter: blur(25px);
+      border-left: 1px solid rgba(168, 85, 247, 0.3);
+      box-shadow: -20px 0 50px rgba(0, 0, 0, 0.8);
+      z-index: 90;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      padding: 26px;
+      overflow-y: auto;
+    }
+    .flashcard-drawer.open {
+      transform: translateX(0);
+    }
+    .cue-block {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+    .cue-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--starlight-gold);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .cue-script {
+      font-size: 0.94rem;
+      line-height: 1.5;
+      color: #e2e8f0;
+    }
+
+    /* ==========================================================================
+       OVERVIEW MODAL
+       ========================================================================= */
+    .overview-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(2, 4, 10, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 200;
+      display: none;
+      flex-direction: column;
+      padding: 40px;
+      overflow-y: auto;
+    }
+    .overview-modal.open {
+      display: flex;
+    }
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 22px;
+      margin-top: 24px;
+    }
+    .overview-thumb {
+      aspect-ratio: 16 / 9;
+      background: rgba(8, 16, 34, 0.8);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+      border-radius: 14px;
+      padding: 18px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+    }
+    .overview-thumb:hover {
+      border-color: var(--nebula-cyan);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0, 223, 216, 0.3);
+    }
+    .overview-thumb.active {
+      border-color: var(--nebula-pink);
+      box-shadow: 0 0 25px rgba(255, 0, 128, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dynamic Starfield & Galaxy Canvas -->
+  <canvas id="galaxy-canvas"></canvas>
+
+  <!-- Nebular Ambient Glows -->
+  <div class="nebula-glow nebula-1"></div>
+  <div class="nebula-glow nebula-2"></div>
+  <div class="nebula-glow nebula-3"></div>
+
+  <!-- Persistent Top Header -->
+  <header class="top-navbar">
+    <div class="nav-brand">
+      <span class="galaxy-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+        SDG 14
+      </span>
+      <span>THE COSMIC OCEAN : LIFE BELOW WATER</span>
+    </div>
+
+    <!-- Active Speaker Pill -->
+    <div class="speaker-nav-badge">
+      <span class="speaker-orb" id="speaker-orb"></span>
+      <span id="nav-sp-name">Speaker 1: Planetary Hook</span>
+      <span style="opacity: 0.4;">|</span>
+      <span style="color: var(--starlight-blue); font-family: 'JetBrains Mono', monospace;" id="nav-sp-time">0:00 - 2:00</span>
+    </div>
+
+    <!-- 15:00 Timer -->
+    <div class="timer-container">
+      <button class="timer-btn" id="btn-timer-toggle" title="Start/Pause Timer (T)">
+        <svg id="timer-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      </button>
+      <span class="timer-time" id="deck-timer">15:00</span>
+      <button class="timer-btn" id="btn-timer-reset" title="Reset Timer">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+      </button>
+    </div>
+
+    <!-- Actions -->
+    <div class="nav-actions">
+      <button class="btn-cosmic" id="btn-toggle-overview" title="Slide Overview (O)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Overview
+      </button>
+      <button class="btn-cosmic" id="btn-toggle-flashcards" title="Flashcard Teleprompter (S)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Prompter
+      </button>
+      <button class="btn-cosmic" id="btn-fullscreen" title="Full Screen (F)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- 16:9 Deck Stage -->
+  <main class="deck-wrapper">
+    <div class="slide-viewport">
+
+      <!-- SLIDE 1: COVER (SPEAKER 1) -->
+      <section class="slide active" data-slide="1" data-sp="1">
+        <div class="slide-header">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--starlight-blue);">Academic Panel • 15:00 Minutes • 6 Speakers</div>
+            <h1 class="slide-title">SDG 14: Life Below Water</h1>
+            <p class="slide-subtitle">Deconstructing Targets 14.1 (Pollution), 14.2 (Ecosystems), & 14.3 (Acidification)</p>
+          </div>
+          <div class="speaker-cue-badge">
+            <div>
+              <div style="font-weight: 800; color: var(--sp1-color);">Speaker 1</div>
+              <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--starlight-blue);">0:00 - 2:00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-body grid-2col" style="align-items: center;">
+          <div class="cosmic-card" style="height: 100%; justify-content: center; --card-accent: var(--starlight-blue);">
+            <div style="font-family: 'Space Grotesk'; font-size: 1.8rem; font-weight: 800; line-height: 1.25; margin-bottom: 20px;">
+              The Blue Planet in the Cosmic Void
+            </div>
+            <ul class="bullet-stream">
+              <li>
+                <span class="bullet-icon">1</span>
+                <span><strong>Primary Life Support:</strong> The ocean is Earth's largest climate and biological stabilizer.</span>
+              </li>
+              <li>
+                <span class="bullet-icon">2</span>
+                <span><strong>The 4 Dimensions:</strong> Target Mandates • UN Indicators • Measurement Science • Governance Treaties.</span>
+              </li>
+              <li>
+                <span class="bullet-icon">3</span>
+                <span><strong>Interlocking Crisis:</strong> Runoff, habitat destruction, and chemical acidification threaten human survival.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 20px; height: 100%;">
+            <div class="cosmic-card" style="--card-accent: var(--starlight-blue); --glow-color: rgba(56, 189, 248, 0.4); flex: 1;">
+              <div class="hero-stat" style="color: var(--starlight-blue);">90%</div>
+              <div class="hero-stat-label">Excess Planetary Heat Absorbed</div>
+              <p style="color: var(--text-soft); font-size: 0.95rem;">Without marine heat uptake, atmospheric temperatures would already be ~36°C hotter.</p>
+            </div>
+            <div class="cosmic-card" style="--card-accent: var(--nebula-cyan); --glow-color: rgba(0, 223, 216, 0.4); flex: 1;">
+              <div class="hero-stat" style="color: var(--nebula-cyan);">30%</div>
+              <div class="hero-stat-label">Anthropogenic CO₂ Sequestered</div>
+              <p style="color: var(--text-soft); font-size: 0.95rem;">Over 22 million tons of fossil carbon dioxide dissolved into seawater every single day.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 2: THE TRIAD ARCHITECTURE (SPEAKER 1) -->
+      <section class="slide" data-slide="2" data-sp="1">
+        <div class="slide-header">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--sp1-color);">Speaker 1 • The Triad Framework</div>
+            <h2 class="slide-title">The Inflow, Sanctuary & Chemistry Triad</h2>
+            <p class="slide-subtitle">Three Interlocking Frontiers Governing the Biosphere</p>
+          </div>
+          <div class="speaker-cue-badge">
+            <div>
+              <div style="font-weight: 800; color: var(--sp1-color);">Speaker 1</div>
+              <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--starlight-blue);">0:00 - 2:00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-body grid-3constellation">
+          <div class="cosmic-card" style="--card-accent: var(--supernova-coral);">
+            <div>
+              <div style="font-family: 'Space Grotesk'; font-size: 2.5rem; font-weight: 800; color: var(--supernova-coral); margin-bottom: 6px;">14.1</div>
+              <div class="hero-stat-label">The Inflow</div>
+              <div style="font-size: 0.85rem; color: var(--supernova-coral); font-weight: 700; margin-bottom: 12px;">MARINE POLLUTION</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">✕</span><span>80% originates from land-based activity.</span></li>
+              <li><span class="bullet-icon">✕</span><span>Agricultural N/P runoff creates hypoxic dead zones.</span></li>
+              <li><span class="bullet-icon">✕</span><span>11M+ metric tons of plastic waste annually.</span></li>
+            </ul>
+          </div>
+
+          <div class="cosmic-card" style="--card-accent: var(--aurora-emerald);">
+            <div>
+              <div style="font-family: 'Space Grotesk'; font-size: 2.5rem; font-weight: 800; color: var(--aurora-emerald); margin-bottom: 6px;">14.2</div>
+              <div class="hero-stat-label">The Sanctuary</div>
+              <div style="font-size: 0.85rem; color: var(--aurora-emerald); font-weight: 700; margin-bottom: 12px;">COASTAL ECOSYSTEMS</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">✓</span><span>Mangroves dissipate 97% of storm wave energy.</span></li>
+              <li><span class="bullet-icon">✓</span><span>Blue carbon stored 4x faster than rainforests.</span></li>
+              <li><span class="bullet-icon">✓</span><span>Ecosystem-Based Management (Ridge-to-Reef).</span></li>
+            </ul>
+          </div>
+
+          <div class="cosmic-card" style="--card-accent: var(--cosmic-violet);">
+            <div>
+              <div style="font-family: 'Space Grotesk'; font-size: 2.5rem; font-weight: 800; color: var(--cosmic-violet); margin-bottom: 6px;">14.3</div>
+              <div class="hero-stat-label">The Chemistry</div>
+              <div style="font-size: 0.85rem; color: var(--cosmic-violet); font-weight: 700; margin-bottom: 12px;">OCEAN ACIDIFICATION</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">⚡</span><span>Surface pH dropped from 8.25 to 8.14.</span></li>
+              <li><span class="bullet-icon">⚡</span><span><strong>+30% acidity surge</strong> ([H⁺] protons).</span></li>
+              <li><span class="bullet-icon">⚡</span><span>Carbonate ions depleted; shell dissolution.</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: TARGET 14.1 MANDATE & VECTORS (SPEAKER 2) -->
+      <section class="slide" data-slide="3" data-sp="2">
+        <div class="slide-header">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--sp2-color);">Speaker 2 • Target 14.1 Mandate</div>
+            <h2 class="slide-title">14.1: Land-Based Inflow & Marine Pollution</h2>
+            <p class="slide-subtitle">Mandate: Prevent and significantly reduce marine pollution of all kinds by 2025.</p>
+          </div>
+          <div class="speaker-cue-badge">
+            <div>
+              <div style="font-weight: 800; color: var(--sp2-color);">Speaker 2</div>
+              <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--supernova-coral);">2:00 - 4:30</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-body grid-2col">
+          <div class="cosmic-card" style="--card-accent: var(--supernova-coral); --glow-color: rgba(251, 113, 133, 0.4);">
+            <div>
+              <div class="hero-stat" style="color: var(--supernova-coral);">500+</div>
+              <div class="hero-stat-label">Hypoxic Oceanic Dead Zones</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">1</span><span>Synthetic agricultural nitrogen and phosphorus leach into river networks.</span></li>
+              <li><span class="bullet-icon">2</span><span>Harmful algal blooms collapse dissolved oxygen (<2.0 mg/L).</span></li>
+              <li><span class="bullet-icon">3</span><span>Demersal fish, crabs, and benthic life asphyxiate across 245,000 km².</span></li>
+            </ul>
+          </div>
+
+          <div class="cosmic-card" style="--card-accent: var(--starlight-gold); --glow-color: rgba(251, 191, 36, 0.4);">
+            <div>
+              <div class="hero-stat" style="color: var(--starlight-gold);">11M+</div>
+              <div class="hero-stat-label">Metric Tons of Plastic Waste Yearly</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">A</span><span>80% delivered via unmanaged urban watersheds and rivers.</span></li>
+              <li><span class="bullet-icon">B</span><span>Solar UV breaks macroplastics down to microplastics (<5mm).</span></li>
+              <li><span class="bullet-icon">C</span><span>Ingested by plankton; bioaccumulates into human seafood.</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: INDICATORS 14.1.1a & 14.1.1b (SPEAKER 2) -->
+      <section class="slide" data-slide="4" data-sp="2">
+        <div class="slide-header">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--sp2-color);">Speaker 2 • UN Statistical Indicators</div>
+            <h2 class="slide-title">Measuring 14.1: Satellites, Transects & Trawls</h2>
+            <p class="slide-subtitle">Official UN Custodian Methodologies for Pollution Monitoring</p>
+          </div>
+          <div class="speaker-avatar-card speaker-cue-badge">
+            <div>
+              <div style="font-weight: 800; color: var(--sp2-color);">Speaker 2</div>
+              <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--supernova-coral);">2:00 - 4:30</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-body grid-2col">
+          <div class="cosmic-card" style="--card-accent: var(--nebula-cyan);">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-family: 'JetBrains Mono'; font-size: 0.85rem; color: var(--nebula-cyan); font-weight: 700;">INDICATOR 14.1.1a</span>
+                <span style="font-size: 0.75rem; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 4px;">Tier II</span>
+              </div>
+              <div class="hero-stat-label" style="font-size: 1.4rem;">Index of Coastal Eutrophication (ICEP)</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">🛰</span><span><strong>Sentinel-3 & NASA MODIS:</strong> Orbiting radiometers detect Chlorophyll-a optical anomalies against baseline thresholds.</span></li>
+              <li><span class="bullet-icon">📊</span><span><strong>Nutrient Modeling:</strong> Evaluates river basin N:P:Si ratios to predict toxic non-diatom blooms.</span></li>
+            </ul>
+          </div>
+
+          <div class="cosmic-card" style="--card-accent: var(--supernova-coral);">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-family: 'JetBrains Mono'; font-size: 0.85rem; color: var(--supernova-coral); font-weight: 700;">INDICATOR 14.1.1b</span>
+                <span style="font-size: 0.75rem; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 4px;">Tier II</span>
+              </div>
+              <div class="hero-stat-label" style="font-size: 1.4rem;">Plastic Debris Density</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">🏖</span><span><strong>Shoreline Transects:</strong> Standardized 100m intertidal surveys counting items per m².</span></li>
+              <li><span class="bullet-icon">🚢</span><span><strong>Manta Trawls:</strong> High-speed 333-micron net tows measuring microplastics per km² in surface waters.</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: TARGET 14.2 MANDATE & CORAL DEGRADATION (SPEAKER 3) -->
+      <section class="slide" data-slide="5" data-sp="3">
+        <div class="slide-header">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--sp3-color);">Speaker 3 • Target 14.2 Mandate</div>
+            <h2 class="slide-title">14.2: Marine & Coastal Ecosystems</h2>
+            <p class="slide-subtitle">Mandate: Sustainably manage and protect marine ecosystems to strengthen resilience by 2020.</p>
+          </div>
+          <div class="speaker-cue-badge">
+            <div>
+              <div style="font-weight: 800; color: var(--sp3-color);">Speaker 3</div>
+              <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--aurora-emerald);">4:30 - 7:00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-body grid-2col">
+          <div class="cosmic-card" style="--card-accent: var(--supernova-coral); --glow-color: rgba(251, 113, 133, 0.4);">
+            <div>
+              <div class="hero-stat" style="color: var(--supernova-coral);">50%</div>
+              <div class="hero-stat-label">Global Coral Reefs Lost or Degraded</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">!</span><span>Mass thermal bleaching triggered by marine heatwaves.</span></li>
+              <li><span class="bullet-icon">!</span><span>Physical destruction from destructive fishing and siltation.</span></li>
+              <li><span class="bullet-icon">!</span><span>The UN 2020 deadline for Target 14.2 was formally missed.</span></li>
+            </ul>
+          </div>
+
+          <div class="cosmic-card" style="--card-accent: var(--aurora-emerald); --glow-color: rgba(52, 211, 153, 0.4);">
+            <div>
+              <div class="hero-stat" style="color: var(--aurora-emerald);">97%</div>
+              <div class="hero-stat-label">Wave Energy Dissipated by Living Reefs</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">🛡</span><span>Mangroves and reefs act as self-repairing sea walls protecting 200M+ coastal residents.</span></li>
+              <li><span class="bullet-icon">🌿</span><span><strong>Ecosystem-Based Management (EBM):</strong> Managing watersheds, mangroves, and reefs as one interconnected web.</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: INDICATOR 14.2.1 & PAPER PARKS (SPEAKER 3) -->
+      <section class="slide" data-slide="6" data-sp="3">
+        <div class="slide-header">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--sp3-color);">Speaker 3 • Spatial Governance & Tech</div>
+            <h2 class="slide-title">Indicator 14.2.1 & Combating "Paper Parks"</h2>
+            <p class="slide-subtitle">Verifying Marine Spatial Planning (MSP) with Satellite Telemetry and eDNA</p>
+          </div>
+          <div class="speaker-cue-badge">
+            <div>
+              <div style="font-weight: 800; color: var(--sp3-color);">Speaker 3</div>
+              <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--aurora-emerald);">4:30 - 7:00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-body grid-2col">
+          <div class="cosmic-card" style="--card-accent: var(--aurora-emerald);">
+            <div>
+              <span style="font-family: 'JetBrains Mono'; font-size: 0.85rem; color: var(--aurora-emerald); font-weight: 700;">INDICATOR 14.2.1</span>
+              <div class="hero-stat-label" style="font-size: 1.35rem; margin-top: 6px;">Ecosystem-Based Marine Management</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">🗺</span><span><strong>Marine Spatial Planning (MSP):</strong> Digital zoning balancing conservation, renewable energy, and fisheries.</span></li>
+              <li><span class="bullet-icon">🔗</span><span><strong>Ecological Corridors:</strong> Connecting isolated Marine Protected Areas (MPAs) into resilient larval networks.</span></li>
+            </ul>
+          </div>
+
+          <div class="cosmic-card" style="--card-accent: var(--starlight-blue);">
+            <div>
+              <span style="font-family: 'JetBrains Mono'; font-size: 0.85rem; color: var(--supernova-coral); font-weight: 700;">THE ENFORCEMENT GAP</span>
+              <div class="hero-stat-label" style="font-size: 1.35rem; margin-top: 6px;">Exposing "Paper Parks" via Tech</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">🛰</span><span><strong>Satellite AIS (Global Fishing Watch):</strong> Real-time tracking of illegal vessel incursions into no-take reserves.</span></li>
+              <li><span class="bullet-icon">🧬</span><span><strong>Environmental DNA (eDNA):</strong> Sequencing shed genetic traces in seawater to quantify fish and shark biodiversity without nets.</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: TARGET 14.3 ACIDIFICATION (SPEAKER 4) -->
+      <section class="slide" data-slide="7" data-sp="4">
+        <div class="slide-header">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--sp4-color);">Speaker 4 • The Chemical Crisis</div>
+            <h2 class="slide-title">14.3: Ocean Acidification ("The Evil Twin")</h2>
+            <p class="slide-subtitle">Mandate: Minimize and address the impacts of ocean acidification via global science.</p>
+          </div>
+          <div class="speaker-cue-badge">
+            <div>
+              <div style="font-weight: 800; color: var(--sp4-color);">Speaker 4</div>
+              <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--cosmic-violet);">7:00 - 9:30</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-body grid-2col">
+          <div class="cosmic-card" style="--card-accent: var(--cosmic-violet); --glow-color: rgba(168, 85, 247, 0.4);">
+            <div>
+              <div class="hero-stat" style="color: var(--cosmic-violet);">22M</div>
+              <div class="hero-stat-label">Metric Tons CO₂ Absorbed Every 24h</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">1</span><span>The ocean acts as an involuntary chemical buffer for atmospheric emissions.</span></li>
+              <li><span class="bullet-icon">2</span><span>Invisible to satellite cameras; alters the fundamental chemistry of all water columns.</span></li>
+            </ul>
+          </div>
+
+          <div class="cosmic-card" style="--card-accent: var(--supernova-coral); --glow-color: rgba(251, 113, 133, 0.4);">
+            <div>
+              <div class="hero-stat" style="color: var(--supernova-coral); font-size: 4rem;">8.25 → 8.14</div>
+              <div class="hero-stat-label">Logarithmic Surface pH Collapse</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">⚡</span><span>A 0.11 unit decrease equals a <strong>+30% surge in corrosive [H⁺] ions</strong>.</span></li>
+              <li><span class="bullet-icon">⚡</span><span>Rate of chemical acidification is 10x faster than any natural shift in 55 million years.</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: THE CARBONATE CASCADE & UNESCO PROTOCOL (SPEAKER 4) -->
+      <section class="slide" data-slide="8" data-sp="4">
+        <div class="slide-header">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--sp4-color);">Speaker 4 • Chemical Mechanism</div>
+            <h2 class="slide-title">The Carbonate Cascade: Stealing Skeletal Ions</h2>
+            <p class="slide-subtitle">How Excess Protons Dissolve Marine Calcifiers & The IOC-UNESCO Protocol</p>
+          </div>
+          <div class="speaker-cue-badge">
+            <div>
+              <div style="font-weight: 800; color: var(--sp4-color);">Speaker 4</div>
+              <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--cosmic-violet);">7:00 - 9:30</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-body" style="display: flex; flex-direction: column;">
+          <!-- Glowing Formula -->
+          <div class="cosmic-formula">
+            <span>CO₂ + H₂O</span>
+            <span style="color: var(--nebula-cyan);">⇌</span>
+            <span>H₂CO₃</span>
+            <span style="color: var(--nebula-cyan);">⇌</span>
+            <span class="chem-pulse">H⁺</span>
+            <span>+ HCO₃⁻</span>
+            <span style="color: var(--nebula-cyan);">⇌</span>
+            <span class="chem-pulse">H⁺ + CO₃²⁻ → HCO₃⁻</span>
+            <span style="font-size: 0.8rem; color: var(--supernova-coral); font-weight: 700;">(CARBONATE STOLEN!)</span>
+          </div>
+
+          <div class="grid-2col" style="flex: 1;">
+            <div class="cosmic-card" style="--card-accent: var(--supernova-coral);">
+              <div class="hero-stat-label" style="font-size: 1.3rem;">Biological Collapse</div>
+              <ul class="bullet-stream">
+                <li><span class="bullet-icon">🐚</span><span><strong>Pteropods ("Sea Butterflies"):</strong> Protective shells literally dissolve within 48 hours in corrosive seawater.</span></li>
+                <li><span class="bullet-icon">🪸</span><span><strong>Corals:</strong> Starved of carbonate ($CO_3^{2-}$), expending 40% more metabolic energy merely to maintain skeletal density.</span></li>
+              </ul>
+            </div>
+
+            <div class="cosmic-card" style="--card-accent: var(--cosmic-violet);">
+              <div class="hero-stat-label" style="font-size: 1.3rem;">IOC-UNESCO Protocol (14.3.1)</div>
+              <ul class="bullet-stream">
+                <li><span class="bullet-icon">🧪</span><span>Thermodynamically requires measuring at least <strong>2 of 4 parameters</strong>:</span></li>
+                <li><span class="bullet-icon">•</span><span>1. Marine pH • 2. Total Alkalinity (TA) • 3. Dissolved Inorganic Carbon (DIC) • 4. pCO₂.</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: 3-TIER GLOBAL MEASUREMENT GRID (SPEAKER 5) -->
+      <section class="slide" data-slide="9" data-sp="5">
+        <div class="slide-header">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--sp5-color);">Speaker 5 • Observing Infrastructure</div>
+            <h2 class="slide-title">The 3-Tier Global Measurement Grid</h2>
+            <p class="slide-subtitle">Observing Ocean Chemistry from Space, Robotic Depths, and Reference Labs</p>
+          </div>
+          <div class="speaker-cue-badge">
+            <div>
+              <div style="font-weight: 800; color: var(--sp5-color);">Speaker 5</div>
+              <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--pulsar-aqua);">9:30 - 12:00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-body grid-3constellation">
+          <div class="cosmic-card" style="--card-accent: var(--starlight-blue);">
+            <div>
+              <span style="font-family: 'JetBrains Mono'; color: var(--starlight-blue); font-weight: 700; font-size: 0.85rem;">TIER 1: ORBIT</span>
+              <div class="hero-stat-label" style="font-size: 1.3rem; margin-top: 4px;">Space Satellites</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">🛰</span><span>Sentinel-3, NASA PACE, MODIS.</span></li>
+              <li><span class="bullet-icon">🛰</span><span>Tracks sea-surface Chlorophyll-a anomalies and radar SAR plastic slicks.</span></li>
+            </ul>
+          </div>
+
+          <div class="cosmic-card" style="--card-accent: var(--nebula-cyan);">
+            <div>
+              <span style="font-family: 'JetBrains Mono'; color: var(--nebula-cyan); font-weight: 700; font-size: 0.85rem;">TIER 2: THE ABYSS</span>
+              <div class="hero-stat-label" style="font-size: 1.3rem; margin-top: 4px;">4,000+ Robotic Floats</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">🤖</span><span>Autonomous Biogeochemical Argo (BGC-Argo) floats diving to 2,000 meters.</span></li>
+              <li><span class="bullet-icon">🤖</span><span>Ion-Sensitive ISFET chips record deep pH profiles with ±0.005 precision.</span></li>
+            </ul>
+          </div>
+
+          <div class="cosmic-card" style="--card-accent: var(--starlight-gold);">
+            <div>
+              <span style="font-family: 'JetBrains Mono'; color: var(--starlight-gold); font-weight: 700; font-size: 0.85rem;">TIER 3: BENCHMARK</span>
+              <div class="hero-stat-label" style="font-size: 1.3rem; margin-top: 4px;">Surface & Lab Truth</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">🔬</span><span>Fixed coral reef mooring buoys measuring pCO₂ gas equilibration.</span></li>
+              <li><span class="bullet-icon">🔬</span><span>Shipboard spectrophotometric dye titration (m-cresol purple, ±0.001 pH).</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: REGIONAL SPOTLIGHT: EAST SEA (SPEAKER 5) -->
+      <section class="slide" data-slide="10" data-sp="5">
+        <div class="slide-header">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--sp5-color);">Speaker 5 • Regional Case Study</div>
+            <h2 class="slide-title">Regional Crucible: The East Sea (Biển Đông)</h2>
+            <p class="slide-subtitle">Where Land Runoff, Coral Degradation, and Acidification Intersect</p>
+          </div>
+          <div class="speaker-cue-badge">
+            <div>
+              <div style="font-weight: 800; color: var(--sp5-color);">Speaker 5</div>
+              <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--pulsar-aqua);">9:30 - 12:00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-body grid-2col">
+          <div class="cosmic-card" style="--card-accent: var(--supernova-coral);">
+            <div class="hero-stat-label" style="font-size: 1.3rem;">The Triad Collision</div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">14.1</span><span><strong>Inflow:</strong> Mekong & Red River deltas discharge heavy agricultural N & P, triggering intense coastal mariculture hypoxia.</span></li>
+              <li><span class="bullet-icon">14.2</span><span><strong>Sanctuary:</strong> Spratly & Paracel archipelago reefs act as critical regional genetic nurseries; threatened by dredging and blast fishing.</span></li>
+              <li><span class="bullet-icon">14.3</span><span><strong>Acidification:</strong> Compound summer heatwaves bleach corals, while declining pH stunts calcification recovery.</span></li>
+            </ul>
+          </div>
+
+          <div class="cosmic-card" style="--card-accent: var(--starlight-gold);">
+            <div class="hero-stat-label" style="font-size: 1.3rem;">The Transboundary Imperative</div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">🌐</span><span>Water currents, plastic gyres, and pelagic larvae ignore geopolitical EEZ borders.</span></li>
+              <li><span class="bullet-icon">🌐</span><span>No single coastal nation can safeguard marine health unilaterally.</span></li>
+              <li><span class="bullet-icon">🌐</span><span>Urgent need for multilateral scientific data sharing under COBSEA & UNEP.</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 11: CUSTODIAN INSTITUTIONS & TREATIES (SPEAKER 6) -->
+      <section class="slide" data-slide="11" data-sp="6">
+        <div class="slide-header">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--sp6-color);">Speaker 6 • Institutional Regimes</div>
+            <h2 class="slide-title">Custodian Institutions & Global Treaties</h2>
+            <p class="slide-subtitle">The Multilateral Governance Architecture Guiding SDG 14</p>
+          </div>
+          <div class="speaker-cue-badge">
+            <div>
+              <div style="font-weight: 800; color: var(--sp6-color);">Speaker 6</div>
+              <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--starlight-gold);">12:00 - 15:00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-body grid-3constellation">
+          <div class="cosmic-card" style="--card-accent: var(--aurora-emerald);">
+            <div>
+              <span style="font-family: 'JetBrains Mono'; color: var(--aurora-emerald); font-weight: 700; font-size: 0.85rem;">UNEP</span>
+              <div class="hero-stat-label" style="font-size: 1.25rem; margin-top: 4px;">Custodian: 14.1 & 14.2</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">•</span><span>Coordinates 18 Regional Seas Conventions.</span></li>
+              <li><span class="bullet-icon">•</span><span>Leading the legally binding Global Plastics Treaty (INC-5).</span></li>
+            </ul>
+          </div>
+
+          <div class="cosmic-card" style="--card-accent: var(--cosmic-violet);">
+            <div>
+              <span style="font-family: 'JetBrains Mono'; color: var(--cosmic-violet); font-weight: 700; font-size: 0.85rem;">IOC-UNESCO</span>
+              <div class="hero-stat-label" style="font-size: 1.25rem; margin-top: 4px;">Custodian: 14.3</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">•</span><span>Oversees GOA-ON (Global Ocean Acidification Observing Network).</span></li>
+              <li><span class="bullet-icon">•</span><span>Establishes global QA/QC chemical standards.</span></li>
+            </ul>
+          </div>
+
+          <div class="cosmic-card" style="--card-accent: var(--starlight-gold);">
+            <div>
+              <span style="font-family: 'JetBrains Mono'; color: var(--starlight-gold); font-weight: 700; font-size: 0.85rem;">IMO</span>
+              <div class="hero-stat-label" style="font-size: 1.25rem; margin-top: 4px;">MARPOL Annex V</div>
+            </div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">•</span><span>Strict global ban on dumping any plastics from vessels at sea.</span></li>
+              <li><span class="bullet-icon">•</span><span>London Convention prohibiting ocean toxic waste dumping.</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 12: GOVERNANCE GAPS & BBNJ TREATY (SPEAKER 6) -->
+      <section class="slide" data-slide="12" data-sp="6">
+        <div class="slide-header">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--sp6-color);">Speaker 6 • Institutional Fractures</div>
+            <h2 class="slide-title">Governance Gaps & The 2023 BBNJ Breakthrough</h2>
+            <p class="slide-subtitle">Bridging the Sensor Divide & Legal Protection for the High Seas</p>
+          </div>
+          <div class="speaker-cue-badge">
+            <div>
+              <div style="font-weight: 800; color: var(--sp6-color);">Speaker 6</div>
+              <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--starlight-gold);">12:00 - 15:00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-body grid-2col">
+          <div class="cosmic-card" style="--card-accent: var(--supernova-coral);">
+            <div class="hero-stat-label" style="font-size: 1.3rem;">Critical Structural Gaps</div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">1</span><span><strong>North-South Sensor Divide:</strong> Over 70% of deep-sea pH buoys and BGC-Argo floats are deployed by Global North institutions.</span></li>
+              <li><span class="bullet-icon">2</span><span><strong>Voluntary Limits:</strong> SDG indicators lack binding sanctions for agricultural runoff or illegal coastal landfills.</span></li>
+            </ul>
+          </div>
+
+          <div class="cosmic-card" style="--card-accent: var(--nebula-cyan);">
+            <div class="hero-stat-label" style="font-size: 1.3rem;">The 2023 BBNJ Breakthrough</div>
+            <ul class="bullet-stream">
+              <li><span class="bullet-icon">★</span><span><strong>High Seas MPAs:</strong> First legal mechanism under UNCLOS to create binding no-take marine reserves in international waters.</span></li>
+              <li><span class="bullet-icon">★</span><span><strong>Mandatory EIAs:</strong> Obligates environmental impact assessments for seabed mining and geoengineering.</span></li>
+              <li><span class="bullet-icon">★</span><span><strong>Key to 30x30:</strong> Fundamental to safeguarding 30% of global oceans by 2030.</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 13: THE 3 GOLDEN RULES (SPEAKER 6) -->
+      <section class="slide" data-slide="13" data-sp="6">
+        <div class="slide-header">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--sp6-color);">Speaker 6 • Policy Synthesis</div>
+            <h2 class="slide-title">The 3 Golden Rules for Marine Survival</h2>
+            <p class="slide-subtitle">Translating SDG 14 Targets into Concrete Global Action</p>
+          </div>
+          <div class="speaker-cue-badge">
+            <div>
+              <div style="font-weight: 800; color: var(--sp6-color);">Speaker 6</div>
+              <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--starlight-gold);">12:00 - 15:00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-body grid-3constellation">
+          <div class="cosmic-card" style="--card-accent: var(--supernova-coral);">
+            <div>
+              <div style="font-family: 'Space Grotesk'; font-size: 2.8rem; font-weight: 800; color: var(--supernova-coral); margin-bottom: 4px;">01</div>
+              <div class="hero-stat-label">Halt at Source</div>
+              <div style="font-size: 0.8rem; color: var(--supernova-coral); font-weight: 700; margin-bottom: 12px;">TARGET 14.1</div>
+            </div>
+            <p style="color: var(--text-soft); font-size: 0.95rem; line-height: 1.45;">
+              Tax synthetic nitrogen runoff and cap virgin plastic polymer manufacturing. Ocean cleanup booms treat symptoms—watershed policy cures the cause.
+            </p>
+          </div>
+
+          <div class="cosmic-card" style="--card-accent: var(--aurora-emerald);">
+            <div>
+              <div style="font-family: 'Space Grotesk'; font-size: 2.8rem; font-weight: 800; color: var(--aurora-emerald); margin-bottom: 4px;">02</div>
+              <div class="hero-stat-label">Enforce Real Webs</div>
+              <div style="font-size: 0.8rem; color: var(--aurora-emerald); font-weight: 700; margin-bottom: 12px;">TARGET 14.2</div>
+            </div>
+            <p style="color: var(--text-soft); font-size: 0.95rem; line-height: 1.45;">
+              Eliminate "Paper Parks." Connect sanctuaries into living biological webs verified by satellite AIS and eDNA, backed by local community co-management.
+            </p>
+          </div>
+
+          <div class="cosmic-card" style="--card-accent: var(--cosmic-violet);">
+            <div>
+              <div style="font-family: 'Space Grotesk'; font-size: 2.8rem; font-weight: 800; color: var(--cosmic-violet); margin-bottom: 4px;">03</div>
+              <div class="hero-stat-label">Decarbonize Rapidly</div>
+              <div style="font-size: 0.8rem; color: var(--cosmic-violet); font-weight: 700; margin-bottom: 12px;">TARGET 14.3</div>
+            </div>
+            <p style="color: var(--text-soft); font-size: 0.95rem; line-height: 1.45;">
+              Ocean chemistry cannot be geoengineered. Rapid fossil fuel phase-out under the Paris Agreement is the only genuine cure for marine carbonate survival.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 14: EXECUTIVE CONCLUSION & Q&A (SPEAKER 6) -->
+      <section class="slide" data-slide="14" data-sp="6">
+        <div class="slide-header">
+          <div>
+            <div class="slide-eyebrow" style="color: var(--sp6-color);">Speaker 6 • Final Conclusion</div>
+            <h2 class="slide-title">"The Ocean Is Not a Sink — It Is Our Life Support"</h2>
+            <p class="slide-subtitle">15:00 Strict Presentation Complete • Panel Open for Discussion</p>
+          </div>
+          <div class="speaker-cue-badge">
+            <div>
+              <div style="font-weight: 800; color: var(--sp6-color);">Speaker 6</div>
+              <div style="font-family: 'JetBrains Mono'; font-size: 0.75rem; color: var(--starlight-gold);">12:00 - 15:00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-body grid-2col" style="align-items: center;">
+          <div class="cosmic-card" style="height: 100%; justify-content: center; --card-accent: var(--starlight-blue);">
+            <div style="font-family: 'Space Grotesk'; font-size: 2rem; font-weight: 800; line-height: 1.2; margin-bottom: 16px;">
+              The Interlocked Triad Dictates Human Habitability
+            </div>
+            <p style="color: var(--text-soft); font-size: 1.05rem; line-height: 1.6;">
+              Targets 14.1, 14.2, and 14.3 are not separate bureaucratic goals—they form the circulatory, immunological, and chemical core of Planet Earth.
+            </p>
+          </div>
+
+          <div class="cosmic-card" style="height: 100%; justify-content: center; text-align: center; --card-accent: var(--nebula-cyan);">
+            <div style="width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, #00dfd8, #7928ca); margin: 0 auto 16px auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(0, 223, 216, 0.5);">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#02040a" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3 style="font-family: 'Space Grotesk'; font-size: 1.9rem; margin-bottom: 8px;">Floor Open for Q&A</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px;">All 6 speakers available for technical and governance inquiries.</p>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+              <button class="btn-cosmic" onclick="goToSlide(1)">Return to Start</button>
+              <button class="btn-cosmic active" onclick="toggleFlashcards()">Open Speaker Prompter</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Bottom Bar -->
+  <footer class="deck-footer">
+    <div class="footer-speakers" id="footer-speakers">
+      <button class="sp-step-btn current" onclick="goToSlide(1)">Sp 1 (0-2m)</button>
+      <button class="sp-step-btn" onclick="goToSlide(3)">Sp 2 (2-4:30m)</button>
+      <button class="sp-step-btn" onclick="goToSlide(5)">Sp 3 (4:30-7m)</button>
+      <button class="sp-step-btn" onclick="goToSlide(7)">Sp 4 (7-9:30m)</button>
+      <button class="sp-step-btn" onclick="goToSlide(9)">Sp 5 (9:30-12m)</button>
+      <button class="sp-step-btn" onclick="goToSlide(11)">Sp 6 (12-15m)</button>
+    </div>
+
+    <div style="font-family: 'JetBrains Mono'; font-size: 0.85rem; color: var(--text-soft);" id="slide-num-indicator">
+      Slide 01 / 14
+    </div>
+
+    <div style="display: flex; gap: 8px;">
+      <button class="btn-cosmic" id="btn-prev">‹</button>
+      <button class="btn-cosmic" id="btn-next">›</button>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+  </footer>
+
+  <!-- Teleprompter Drawer -->
+  <aside class="flashcard-drawer" id="flashcard-drawer">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; margin-bottom: 20px;">
+      <div>
+        <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted);">Speaker Support</div>
+        <div style="font-family: 'Space Grotesk'; font-size: 1.15rem; font-weight: 700; color: var(--nebula-cyan);" id="prompter-title">Speaker 1 Cues</div>
+      </div>
+      <button class="timer-btn" onclick="toggleFlashcards()">✕</button>
+    </div>
+    <div id="prompter-content"></div>
+  </aside>
+
+  <!-- Overview Modal -->
+  <div class="overview-modal" id="overview-modal">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <h2 style="font-family: 'Space Grotesk'; font-size: 1.8rem;">Constellation Overview</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Select any slide to warp directly.</p>
+      </div>
+      <button class="btn-cosmic" onclick="toggleOverview()">Close</button>
+    </div>
+    <div class="overview-grid" id="overview-grid"></div>
+  </div>
+
+  <script>
+    // =======================================================================
+    // 1. SLIDE DATA & TIMINGS
+    // =======================================================================
+    const slidesData = [
+      { num: 1, sp: 1, spName: "Speaker 1", time: "0:00 - 2:00", title: "The Cosmic Ocean & 4 Dimensions", cue: "Hook the audience: 'Earth is not a rock planet; it is a water world in the cosmic void.' Mention 90% heat and 30% CO2 absorbed." },
+      { num: 2, sp: 1, spName: "Speaker 1", time: "0:00 - 2:00", title: "The Triad Framework", cue: "Deconstruct the 3 frontiers: 14.1 Inflow from land, 14.2 Sanctuary of coastal webs, 14.3 Chemistry of the abyss. Handover to Speaker 2." },
+      { num: 3, sp: 2, spName: "Speaker 2", time: "2:00 - 4:30", title: "14.1 Land Inflow & Dual Threats", cue: "State 2025 UN mandate. 80% land origin. Vector 1: Agricultural N/P runoff causing hypoxia. Vector 2: 11M+ tons plastics." },
+      { num: 4, sp: 2, spName: "Speaker 2", time: "2:00 - 4:30", title: "Measuring 14.1 (ICEP & Plastics)", cue: "Detail Indicator 14.1.1a (ICEP via Sentinel-3 chlorophyll anomaly) and 14.1.1b (100m beach transects & manta trawls). Handover to Speaker 3." },
+      { num: 5, sp: 3, spName: "Speaker 3", time: "4:30 - 7:00", title: "14.2 Coastal Living Shields", cue: "Highlight the missed 2020 deadline. 50% reefs degraded. Mangroves dissipate 97% wave energy. Introduce EBM (Ridge-to-Reef)." },
+      { num: 6, sp: 3, spName: "Speaker 3", time: "4:30 - 7:00", title: "14.2.1 & Beyond Paper Parks", cue: "Explain Indicator 14.2.1 (MSP). Call out 'Paper Parks'. Explain tech solutions: Satellite AIS vessel tracking and eDNA sampling. Handover to Speaker 4." },
+      { num: 7, sp: 4, spName: "Speaker 4", time: "7:00 - 9:30", title: "14.3 Ocean Acidification", cue: "Introduce 'The Evil Twin': 22M tons CO2 daily. Explain logarithmic pH drop: 8.25 to 8.14 is a +30% surge in corrosive [H+] ions." },
+      { num: 8, sp: 4, spName: "Speaker 4", time: "7:00 - 9:30", title: "Carbonate Cascade & UNESCO", cue: "Walk through chemical equation: H+ steals CO3(2-). Shells dissolve in 48h. Detail IOC-UNESCO protocol (measure 2 of 4 parameters). Handover to Speaker 5." },
+      { num: 9, sp: 5, spName: "Speaker 5", time: "9:30 - 12:00", title: "3-Tier Measurement Grid", cue: "Explain 3-Tier Grid: Space (Sentinel-3/PACE) -> Abyss (4,000+ BGC-Argo robotic floats to 2,000m) -> Ground Truth (Reef buoys & titration)." },
+      { num: 10, sp: 5, spName: "Speaker 5", time: "9:30 - 12:00", title: "Regional Crucible: The East Sea", cue: "Ground in reality: Mekong/Red River runoff (14.1), Spratly/Paracel nurseries (14.2), heat+acid compound stress (14.3). Handover to Speaker 6." },
+      { num: 11, sp: 6, spName: "Speaker 6", time: "12:00 - 15:00", title: "Custodian Institutions & Treaties", cue: "Outline institutional map: UNEP (14.1 & 14.2, Plastics Treaty), IOC-UNESCO (14.3, GOA-ON), IMO (MARPOL Annex V)." },
+      { num: 12, sp: 6, spName: "Speaker 6", time: "12:00 - 15:00", title: "Gaps & The 2023 BBNJ Treaty", cue: "Detail the 70% North-South sensor divide and voluntary enforcement limits. Celebrate the historic 2023 BBNJ High Seas Treaty." },
+      { num: 13, sp: 6, spName: "Speaker 6", time: "12:00 - 15:00", title: "The 3 Golden Rules", cue: "Deliver the 3 Rules: 1. Halt at source, 2. Enforce real webs, 3. Decarbonize rapidly. Strong, authoritative delivery." },
+      { num: 14, sp: 6, spName: "Speaker 6", time: "12:00 - 15:00", title: "Conclusion & Q&A Floor", cue: "Deliver the closing punchline: 'The ocean is not a sink — it is our life support.' Stop timer at exactly 15:00. Open floor for Q&A." }
+    ];
+
+    let currentIdx = 0;
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+
+    const navSpName = document.getElementById('nav-sp-name');
+    const navSpTime = document.getElementById('nav-sp-time');
+    const speakerOrb = document.getElementById('speaker-orb');
+    const slideNumIndicator = document.getElementById('slide-num-indicator');
+    const progressFill = document.getElementById('progress-fill');
+    const prompterContent = document.getElementById('prompter-content');
+    const prompterTitle = document.getElementById('prompter-title');
+    const drawer = document.getElementById('flashcard-drawer');
+    const overviewModal = document.getElementById('overview-modal');
+    const overviewGrid = document.getElementById('overview-grid');
+    const footerButtons = document.querySelectorAll('.sp-step-btn');
+
+    const spColors = {
+      1: 'var(--sp1-color)',
+      2: 'var(--sp2-color)',
+      3: 'var(--sp3-color)',
+      4: 'var(--sp4-color)',
+      5: 'var(--sp5-color)',
+      6: 'var(--sp6-color)'
+    };
+
+    function updateDeck() {
+      slides.forEach((s, idx) => {
+        if (idx === currentIdx) s.classList.add('active');
+        else s.classList.remove('active');
+      });
+
+      const d = slidesData[currentIdx];
+      slideNumIndicator.textContent = `Slide ${String(currentIdx + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+      progressFill.style.width = `${((currentIdx + 1) / total) * 100}%`;
+
+      navSpName.textContent = `${d.spName}: ${d.title}`;
+      navSpTime.textContent = d.time;
+      speakerOrb.style.color = spColors[d.sp];
+
+      footerButtons.forEach((btn, bIdx) => {
+        if (bIdx + 1 === d.sp) btn.classList.add('current');
+        else btn.classList.remove('current');
+      });
+
+      // Update prompter
+      prompterTitle.textContent = `${d.spName} Cues (${d.time})`;
+      prompterContent.innerHTML = `
+        <div class="cue-block">
+          <div class="cue-time">Slide ${d.num} • Target Pace</div>
+          <h4 style="color: #fff; margin-bottom: 8px;">${d.title}</h4>
+          <p class="cue-script">${d.cue}</p>
+        </div>
+      `;
+
+      // Overview active
+      const thumbs = document.querySelectorAll('.overview-thumb');
+      thumbs.forEach((t, tIdx) => {
+        if (tIdx === currentIdx) t.classList.add('active');
+        else t.classList.remove('active');
+      });
+    }
+
+    function goToSlide(num) {
+      currentIdx = Math.max(0, Math.min(num - 1, total - 1));
+      updateDeck();
+    }
+    function nextSlide() { if (currentIdx < total - 1) { currentIdx++; updateDeck(); } }
+    function prevSlide() { if (currentIdx > 0) { currentIdx--; updateDeck(); } }
+
+    function toggleFlashcards() {
+      drawer.classList.toggle('open');
+      document.getElementById('btn-toggle-flashcards').classList.toggle('active');
+    }
+
+    function toggleOverview() {
+      overviewModal.classList.toggle('open');
+      document.getElementById('btn-toggle-overview').classList.toggle('active');
+    }
+
+    function buildOverview() {
+      overviewGrid.innerHTML = '';
+      slidesData.forEach((d, idx) => {
+        const thumb = document.createElement('div');
+        thumb.className = `overview-thumb ${idx === currentIdx ? 'active' : ''}`;
+        thumb.innerHTML = `
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 6px;">
+              <span style="color: ${spColors[d.sp]}; font-weight: 700;">${d.spName}</span>
+              <span style="color: var(--text-muted);">${d.time}</span>
+            </div>
+            <div style="font-weight: 700; color: #fff; font-size: 0.95rem;">${d.num}. ${d.title}</div>
+          </div>
+        `;
+        thumb.onclick = () => { goToSlide(d.num); toggleOverview(); };
+        overviewGrid.appendChild(thumb);
+      });
+    }
+
+    // Timer
+    let tSec = 15 * 60;
+    let tRunning = false;
+    let tInterval = null;
+    const timerDisplay = document.getElementById('deck-timer');
+    const timerIcon = document.getElementById('timer-icon');
+
+    function toggleTimer() {
+      if (tRunning) {
+        clearInterval(tInterval);
+        tRunning = false;
+        timerIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
+      } else {
+        tRunning = true;
+        timerIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+        tInterval = setInterval(() => {
+          if (tSec > 0) {
+            tSec--;
+            const m = Math.floor(tSec / 60);
+            const s = tSec % 60;
+            timerDisplay.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+            if (tSec <= 60) timerDisplay.style.color = 'var(--supernova-coral)';
+          } else {
+            clearInterval(tInterval);
+            timerDisplay.textContent = "00:00 (Time)";
+          }
+        }, 1000);
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(tInterval);
+      tRunning = false;
+      tSec = 15 * 60;
+      timerDisplay.textContent = "15:00";
+      timerDisplay.style.color = "var(--starlight-blue)";
+      timerIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
+    }
+
+    document.getElementById('btn-timer-toggle').onclick = toggleTimer;
+    document.getElementById('btn-timer-reset').onclick = resetTimer;
+    document.getElementById('btn-next').onclick = nextSlide;
+    document.getElementById('btn-prev').onclick = prevSlide;
+    document.getElementById('btn-toggle-flashcards').onclick = toggleFlashcards;
+    document.getElementById('btn-toggle-overview').onclick = toggleOverview;
+    document.getElementById('btn-fullscreen').onclick = () => {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    };
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); nextSlide(); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prevSlide(); }
+      else if (e.key === 's' || e.key === 'S') { e.preventDefault(); toggleFlashcards(); }
+      else if (e.key === 'o' || e.key === 'O' || e.key === 'Escape') { e.preventDefault(); toggleOverview(); }
+      else if (e.key === 't' || e.key === 'T') { e.preventDefault(); toggleTimer(); }
+      else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+        else document.exitFullscreen();
+      }
+    });
+
+    // =======================================================================
+    // 2. COSMIC STARFIELD & GALAXY PARTICLES CANVAS
+    // =======================================================================
+    const canvas = document.getElementById('galaxy-canvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Star {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2.2 + 0.5;
+        this.alpha = Math.random() * 0.8 + 0.2;
+        this.twinkleSpeed = Math.random() * 0.02 + 0.005;
+        this.color = ['#ffffff', '#a855f7', '#00dfd8', '#38bdf8'][Math.floor(Math.random() * 4)];
+        this.speedX = (Math.random() - 0.5) * 0.15;
+        this.speedY = (Math.random() - 0.5) * 0.15;
+      }
+      update() {
+        this.alpha += this.twinkleSpeed;
+        if (this.alpha > 1 || this.alpha < 0.2) this.twinkleSpeed = -this.twinkleSpeed;
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = Math.max(0.1, Math.min(1, this.alpha));
+        ctx.shadowBlur = this.size * 4;
+        ctx.shadowColor = this.color;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    for (let i = 0; i < 110; i++) stars.push(new Star());
+
+    function animateGalaxy() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => { s.update(); s.draw(); });
+      requestAnimationFrame(animateGalaxy);
+    }
+    animateGalaxy();
+
+    buildOverview();
+    updateDeck();
+  </script>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SDG 14 Cosmic Prompter | 6 Speakers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --space-void: #02040a;
+      --card-bg: rgba(10, 18, 36, 0.85);
+      --card-border: rgba(168, 85, 247, 0.3);
+      --cyan: #00dfd8;
+      --blue: #38bdf8;
+      --coral: #fb7185;
+      --gold: #fbbf24;
+      --purple: #c084fc;
+      --emerald: #34d399;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #02040a;
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(4, 9, 20, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(168, 85, 247, 0.25);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .title-area h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff, #00dfd8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .title-area p {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .timer-pill {
+      background: rgba(8, 14, 28, 0.9);
+      border: 1px solid rgba(0, 223, 216, 0.4);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--cyan);
+      cursor: pointer;
+    }
+
+    .sp-tabs {
+      display: flex;
+      overflow-x: auto;
+      gap: 8px;
+      padding: 12px 16px;
+      scrollbar-width: none;
+      background: rgba(4, 9, 20, 0.6);
+    }
+    .sp-tabs::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, #00dfd8, #007cf0);
+      color: #02040a;
+      border-color: transparent;
+      box-shadow: 0 0 14px rgba(0, 223, 216, 0.5);
+    }
+
+    .container {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 18px;
+      backdrop-filter: blur(12px);
+    }
+
+    .cue-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .cue-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gold);
+      background: rgba(251, 191, 36, 0.12);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .speech-box {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #f1f5f9;
+      margin-top: 10px;
+    }
+    .stage-dir {
+      font-style: italic;
+      color: #38bdf8;
+      font-size: 0.84rem;
+      margin-bottom: 8px;
+      display: block;
+      border-left: 2px solid #38bdf8;
+      padding-left: 8px;
+    }
+    .emphasis {
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .handoff {
+      background: rgba(251, 113, 133, 0.12);
+      border: 1px dashed rgba(251, 113, 133, 0.4);
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      color: #fecdd3;
+      margin-top: 12px;
+    }
+
+    .footer-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(4, 9, 20, 0.98);
+      border-top: 1px solid rgba(168, 85, 247, 0.2);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .nav-btn:hover {
+      background: var(--cyan);
+      color: #02040a;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="title-area">
+      <h1>SDG 14 Teleprompter</h1>
+      <p id="sp-label">Speaker 1 • 0:00 - 2:00</p>
+    </div>
+    <div class="timer-pill" id="prompter-timer" onclick="toggleTimer()">
+      <span id="p-timer">15:00</span> ⏱
+    </div>
+  </header>
+
+  <div class="sp-tabs">
+    <button class="tab-btn active" onclick="setSpeaker(1)">Sp 1 (0:00-2:00)</button>
+    <button class="tab-btn" onclick="setSpeaker(2)">Sp 2 (2:00-4:30)</button>
+    <button class="tab-btn" onclick="setSpeaker(3)">Sp 3 (4:30-7:00)</button>
+    <button class="tab-btn" onclick="setSpeaker(4)">Sp 4 (7:00-9:30)</button>
+    <button class="tab-btn" onclick="setSpeaker(5)">Sp 5 (9:30-12:00)</button>
+    <button class="tab-btn" onclick="setSpeaker(6)">Sp 6 (12:00-15:00)</button>
+  </div>
+
+  <main class="container" id="feed"></main>
+
+  <div class="footer-bar">
+    <button class="nav-btn" onclick="step(-1)">‹ Prev</button>
+    <span style="font-size: 0.78rem; color: var(--text-muted);" id="sp-counter">Speaker 1 of 6</span>
+    <button class="nav-btn" onclick="step(1)">Next ›</button>
+  </div>
+
+  <script>
+    const scripts = {
+      1: {
+        label: "Speaker 1 • 0:00 - 2:00 (Hook & Triad)",
+        blocks: [
+          {
+            time: "0:00 - 0:40 • Slide 1",
+            dir: "Stance: Center stage. Direct eye contact with the jury. Do not look back at the screen yet.",
+            text: "Good morning, esteemed faculty, professors, and colleagues.<br><br>When humanity speaks of climate change, our collective gaze instinctively rises to the sky—to the atmosphere, greenhouse gases, and smokestacks. But that perspective overlooks our planet's true life-support engine. From the cosmic void, Earth is not a world of rock; it is a radiant, fragile blue orb. It is a water world.<br><br>Consider two staggering numbers: Since 1970, our oceans have absorbed over <span class='emphasis'>90% of all excess planetary heat</span>, and quietly drawn down <span class='emphasis'>30% of all human carbon dioxide</span>.<br><br>Without this oceanic sponge, atmospheric temperatures would already be unlivable—averaging 36 degrees Celsius hotter than today. We are not protecting the ocean; the ocean has been shielding us."
+          },
+          {
+            time: "0:40 - 2:00 • Slide 2",
+            dir: "Click Slide 2. Step forward toward the evaluators.",
+            text: "Our panel deconstructs SDG 14 across four academic lenses: Mandates, Indicators, Measurement Science, and Treaties.<br><br>These targets form an indivisible Triad:<br><br>• <span class='emphasis'>Target 14.1 (The Inflow)</span>: The land-based pour of synthetic fertilizers and plastics.<br>• <span class='emphasis'>Target 14.2 (The Sanctuary)</span>: Living biological shields—reefs and mangroves—managed through Ecosystem-Based Management.<br>• <span class='emphasis'>Target 14.3 (The Chemistry)</span>: The chemical interior of the abyss, where dissolved CO2 is stripping carbonate ions.",
+            handoff: "Handover to Speaker 2: 'To deconstruct the first breach in this triad—the massive inflow of synthetic fertilizers and plastics—I hand the floor to Speaker 2 to examine Target 14.1.'"
+          }
+        ]
+      },
+      2: {
+        label: "Speaker 2 • 2:00 - 4:30 (Target 14.1 Pollution)",
+        blocks: [
+          {
+            time: "2:00 - 3:15 • Slide 3",
+            dir: "Step forward cleanly. Project with energy.",
+            text: "Thank you, Speaker 1.<br><br>The mandate for Target 14.1 requires nations to prevent and significantly reduce marine pollution of all kinds by 2025. Over <span class='emphasis'>80% originates on land</span> across two vectors:<br><br>Vector A: <span class='emphasis'>Nutrient Overload</span>. Synthetic N & P runoff triggers Harmful Algal Blooms. Microbial decomposition consumes dissolved oxygen (< 2.0 mg/L), creating over <span class='emphasis'>500 oceanic dead zones</span> across 245,000 square kilometers.<br><br>Vector B: <span class='emphasis'>Marine Plastics</span>. Over <span class='emphasis'>11 million metric tons</span> enter annually. Solar UV breaks macroplastics down into toxic microplastics (< 5mm) that bioaccumulate up the food chain into human seafood."
+          },
+          {
+            time: "3:15 - 4:30 • Slide 4",
+            dir: "Click Slide 4. Point to ICEP and Plastics.",
+            text: "Two official UN indicators monitor Target 14.1:<br><br>• <span class='emphasis'>Indicator 14.1.1a (ICEP)</span>: Index of Coastal Eutrophication. Evaluates river basin N:P:Si ratios using Sentinel-3 and MODIS satellite Chlorophyll-a optical anomalies against baseline river discharge models.<br><br>• <span class='emphasis'>Indicator 14.1.1b (Plastic Density)</span>: Standardized 100m intertidal shoreline transects (items/m²) paired with research vessel manta-trawl net tows (333-micron mesh, particles/km²).",
+            handoff: "Handover to Speaker 3: 'While land pollution flows unchecked from river mouths, our frontline ecological barriers are falling. I invite Speaker 3 to examine Target 14.2.'"
+          }
+        ]
+      },
+      3: {
+        label: "Speaker 3 • 4:30 - 7:00 (Target 14.2 Habitats)",
+        blocks: [
+          {
+            time: "4:30 - 5:45 • Slide 5",
+            dir: "Take center stage. Serious, reflective academic tone.",
+            text: "Thank you, Speaker 2.<br><br>Target 14.2 mandated sustainable management of coastal ecosystems by 2020. Academically, we must acknowledge: <span class='emphasis'>Target 14.2 has formally missed its 2020 deadline</span>.<br><br>Over <span class='emphasis'>50% of global coral reefs</span> are destroyed or severely degraded. Yet healthy reefs dissipate <span class='emphasis'>97% of storm wave energy</span>, protecting 200 million coastal residents, while mangroves sequester blue carbon 4 times faster than rainforests.<br><br>This requires <span class='emphasis'>Ecosystem-Based Management (EBM)</span>: 'Ridge-to-Reef' connectivity, recognizing that upstream logging pollutes mangroves, which smothers offshore reefs."
+          },
+          {
+            time: "5:45 - 7:00 • Slide 6",
+            dir: "Click Slide 6. Emphasize technological verification.",
+            text: "<span class='emphasis'>Indicator 14.2.1</span> tracks Marine Spatial Planning (MSP). But we face the <span class='emphasis'>'Paper Park' dilemma</span>: protected areas that exist only on paper without boats or enforcement.<br><br>Today, technology exposes this:<br>1. <span class='emphasis'>Satellite AIS (Global Fishing Watch)</span>: Tracks dark fishing fleets entering reserves via algorithm speed anomalies.<br>2. <span class='emphasis'>Environmental DNA (eDNA)</span>: 1 liter of seawater sequences shed cellular DNA, mapping shark and fish richness without nets.",
+            handoff: "Handover to Speaker 4: 'Even if we build walls around sanctuaries, an invisible chemical threat permeates every cubic meter of seawater. Speaker 4 will deconstruct Target 14.3.'"
+          }
+        ]
+      },
+      4: {
+        label: "Speaker 4 • 7:00 - 9:30 (Target 14.3 Acidification)",
+        blocks: [
+          {
+            time: "7:00 - 8:15 • Slide 7",
+            dir: "Step up with academic gravity. Speak deliberately.",
+            text: "Thank you, Speaker 3.<br><br>Target 14.3 mandates addressing ocean acidification through enhanced scientific cooperation. Scientists call this <span class='emphasis'>'The Evil Twin of Global Warming'</span>.<br><br>Every 24 hours, the surface ocean absorbs <span class='emphasis'>22 million metric tons of CO2</span>.<br><br>Surface ocean pH has dropped from <span class='emphasis'>8.25 pre-industrial to 8.14 today</span>. Because pH is logarithmic (-log[H+]), a 0.11 drop is an astronomical <span class='emphasis'>30% surge in corrosive hydrogen ion acidity</span>—changing chemistry 10x faster than in 55 million years."
+          },
+          {
+            time: "8:15 - 9:30 • Slide 8",
+            dir: "Click Slide 8. Trace the chemical formula on the screen.",
+            text: "Here is the exact reaction:<br><br>CO2 + H2O forms Carbonic Acid, releasing free H+ protons. These protons steal carbonate ions (CO3 2-) to form bicarbonate.<br><br>Marine calcifiers need free carbonate for Calcium Carbonate (CaCO3). By stealing carbonate, seawater becomes corrosive: <span class='emphasis'>pteropod sea snail shells literally dissolve within 48 hours</span>.<br><br>Under <span class='emphasis'>Indicator 14.3.1</span>, custodian agency IOC-UNESCO requires stations to measure at least <span class='emphasis'>2 of 4 parameters</span>: Marine pH, Total Alkalinity (TA), Dissolved Inorganic Carbon (DIC), or pCO2.",
+            handoff: "Handover to Speaker 5: 'To see how our global sensor robotics capture these parameters across planetary depths, I invite Speaker 5.'"
+          }
+        ]
+      },
+      5: {
+        label: "Speaker 5 • 9:30 - 12:00 (Measurement & East Sea)",
+        blocks: [
+          {
+            time: "9:30 - 10:45 • Slide 9",
+            dir: "Confident observational scientific cadence.",
+            text: "Thank you, Speaker 4.<br><br>Observing the global ocean requires a <span class='emphasis'>3-Tier Measurement Grid</span>:<br><br>• <span class='emphasis'>Tier 1 (Orbit)</span>: Sentinel-3 and NASA PACE satellites track sea surface optical anomalies and SAR radar plastic slicks.<br>• <span class='emphasis'>Tier 2 (Depth)</span>: The Biogeochemical Argo array—over <span class='emphasis'>4,000 autonomous robotic floats</span> diving to 2,000 meters, profiling pH with ISFET sensor chips.<br>• <span class='emphasis'>Tier 3 (Lab Truth)</span>: Moored reef buoys and shipboard spectrophotometric titration (m-cresol purple dye, ±0.001 pH accuracy)."
+          },
+          {
+            time: "10:45 - 12:00 • Slide 10",
+            dir: "Click Slide 10. Elevate geopolitical and regional urgency.",
+            text: "We ground this theory in a real crucible: <span class='emphasis'>The East Sea (Biển Đông)</span>, home to 300M+ people in its basins.<br><br>• <span class='emphasis'>14.1 Inflow</span>: Mekong & Red River runoff fuels seasonal coastal hypoxia.<br>• <span class='emphasis'>14.2 Sanctuary</span>: Spratly & Paracel coral reefs serve as regional larval gene banks, threatened by dredging.<br>• <span class='emphasis'>14.3 Acidification</span>: Compound heatwaves bleach corals while falling pH stunts calcification recovery.<br><br>The vital lesson: ocean currents ignore EEZ borders. Transboundary data sharing under UNEP and COBSEA is essential.",
+            handoff: "Handover to Speaker 6: 'To conclude with global governance, treaties, and institutional solutions, I yield to Speaker 6.'"
+          }
+        ]
+      },
+      6: {
+        label: "Speaker 6 • 12:00 - 15:00 (Governance & Conclusion)",
+        blocks: [
+          {
+            time: "12:00 - 13:00 • Slide 11",
+            dir: "Authoritative closing cadence. Stand tall.",
+            text: "Thank you, Speaker 5.<br><br>SDG 14 governance is anchored by three custodians:<br><br>1. <span class='emphasis'>UNEP</span>: Custodian for 14.1 & 14.2 (18 Regional Seas Conventions & negotiating the Global Plastics Treaty under INC-5).<br>2. <span class='emphasis'>IOC-UNESCO</span>: Custodian for 14.3 (Overseeing GOA-ON network).<br>3. <span class='emphasis'>IMO</span>: MARPOL Annex V universally prohibiting all plastic dumping from ships."
+          },
+          {
+            time: "13:00 - 13:45 • Slide 12",
+            dir: "Click Slide 12. Deliver breakthrough with optimism.",
+            text: "We face two major gaps: The <span class='emphasis'>70% North-South sensor divide</span> in deep-sea buoys, and voluntary compliance limits.<br><br>However, in March 2023, the UN finalized the historic <span class='emphasis'>BBNJ High Seas Treaty</span>. For the first time, international law provides a mechanism to establish <span class='emphasis'>binding Marine Protected Areas in the high seas</span>, unlocking the 30x30 conservation target."
+          },
+          {
+            time: "13:45 - 15:00 • Slides 13 & 14",
+            dir: "Click Slide 13, then Slide 14. Maximum conviction. Panel joins you.",
+            text: "We translate SDG 14 into <span class='emphasis'>Three Golden Rules</span>:<br><br>1. <span class='emphasis'>Halt at the Source (14.1)</span>: Tax synthetic N runoff and cap virgin plastic manufacturing.<br>2. <span class='emphasis'>Enforce Real Webs (14.2)</span>: Eliminate Paper Parks with satellite AIS and eDNA.<br>3. <span class='emphasis'>Decarbonize Rapidly (14.3)</span>: Rapid Paris Agreement emissions cuts are the only true cure for acidification.<br><br>Colleagues: <span class='emphasis'>'The ocean is not a bottomless sink — it is our life support.'</span><br><br>Thank you. Our panel is now open for academic questions.",
+            handoff: "Click stop timer at exactly 15:00. Maintain authoritative posture for faculty Q&A."
+          }
+        ]
+      }
+    };
+
+    let activeSp = 1;
+
+    function renderFeed() {
+      const data = scripts[activeSp];
+      document.getElementById('sp-label').textContent = data.label;
+      document.getElementById('sp-counter').textContent = `Speaker ${activeSp} of 6`;
+
+      const feed = document.getElementById('feed');
+      let html = '';
+
+      data.blocks.forEach(b => {
+        html += `
+          <div class="card">
+            <div class="cue-meta">
+              <span class="cue-time">⏱ ${b.time}</span>
+            </div>
+            ${b.dir ? `<span class="stage-dir">${b.dir}</span>` : ''}
+            <div class="speech-box">${b.text}</div>
+            ${b.handoff ? `<div class="handoff"><strong>Handoff:</strong> ${b.handoff}</div>` : ''}
+          </div>
+        `;
+      });
+
+      feed.innerHTML = html;
+
+      const tabs = document.querySelectorAll('.tab-btn');
+      tabs.forEach((t, idx) => {
+        if (idx + 1 === activeSp) t.classList.add('active');
+        else t.classList.remove('active');
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function setSpeaker(num) {
+      activeSp = num;
+      renderFeed();
+    }
+
+    function step(delta) {
+      const target = activeSp + delta;
+      if (target >= 1 && target <= 6) {
+        activeSp = target;
+        renderFeed();
+      }
+    }
+
+    // Timer
+    let sec = 15 * 60;
+    let run = false;
+    let intv = null;
+    function toggleTimer() {
+      const disp = document.getElementById('p-timer');
+      if (run) {
+        clearInterval(intv);
+        run = false;
+      } else {
+        run = true;
+        intv = setInterval(() => {
+          if (sec > 0) {
+            sec--;
+            const m = Math.floor(sec / 60);
+            const s = sec % 60;
+            disp.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+          } else {
+            clearInterval(intv);
+            disp.textContent = "00:00";
+          }
+        }, 1000);
+      }
+    }
+
+    renderFeed();
+  </script>
+</body>
+</html>
